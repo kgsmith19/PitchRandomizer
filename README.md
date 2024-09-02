@@ -35,7 +35,7 @@ The Pitch Randomizer is an early-stage prototype designed to assist pitchers in 
    Clone this repository to your local machine using the following command:
 
    ```bash
-   git clone https://github.com/yourusername/PitchRandomizer.git
+   git clone https://github.com/kgsmith19/PitchRandomizer.git
    ```
 
 2. **Open the Application**:
@@ -64,5 +64,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgements
 
-- Thanks to the baseball simulation gaming community for inspiring this project.
+- Thanks to the HCBB 9v9 2.0 gaming community for inspiring this project.
 - Special thanks to the developers of the technologies used in this project.
