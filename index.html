@@ -9,20 +9,31 @@
         font-family: Arial, sans-serif;
         text-align: center;
         padding: 20px;
+        background-color: #f0f0f0;
       }
-      button {
+      button,
+      input[type="range"],
+      label {
         margin: 10px;
         padding: 10px 20px;
         font-size: 16px;
+        cursor: pointer;
       }
       #output {
         margin-top: 20px;
-        font-size: 18px;
+        font-size: 20px;
         font-weight: bold;
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
       }
       #count {
         margin-top: 10px;
-        font-size: 16px;
+        font-size: 18px;
+      }
+      #speedLabel {
+        font-weight: bold;
       }
     </style>
   </head>
@@ -37,6 +48,24 @@
     <button onclick="incrementBalls()">Add Ball</button>
     <button onclick="incrementStrikes()">Add Strike</button>
     <button onclick="resetCount()">Reset Count</button>
+
+    <br />
+
+    <label for="ballStrikeSlider">Strike/Ball Bias</label>
+    <input
+      type="range"
+      id="ballStrikeSlider"
+      min="0"
+      max="100"
+      value="0"
+      oninput="updateSliderLabel()"
+    />
+    <span id="sliderLabel">All Strikes</span>
+
+    <br />
+
+    <label for="allowMidsToggle">Allow Mids?</label>
+    <input type="checkbox" id="allowMidsToggle" />
 
     <script src="script.js"></script>
   </body>

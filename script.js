@@ -1,4 +1,3 @@
-// Possible pitch speeds, types, and locations
 const speeds = ["Red", "Yellow", "Green", "Blue"];
 const pitchTypes = [
   "Fastball",
@@ -23,20 +22,10 @@ const locations = [
   "Inside Middle Out",
   "Inside High Out",
   "High Middle Out",
-  "Middle Middle Out",
   "Middle Low Out",
   "Outside Low Out",
   "Outside Middle Out",
   "Outside High Out",
-  "Inside Low Way Out",
-  "Inside Middle Way Out",
-  "Inside High Way Out",
-  "High Middle Way Out",
-  "Middle Middle Way Out",
-  "Middle Low Way Out",
-  "Outside Low Way Out",
-  "Outside Middle Way Out",
-  "Outside High Way Out",
 ];
 
 let balls = 0;
@@ -45,11 +34,80 @@ let strikes = 0;
 function randomizePitch() {
   const speed = speeds[Math.floor(Math.random() * speeds.length)];
   const pitchType = pitchTypes[Math.floor(Math.random() * pitchTypes.length)];
-  const location = locations[Math.floor(Math.random() * locations.length)];
+
+  let availableLocations = locations.filter(
+    (loc) =>
+      document.getElementById("allowMidsToggle").checked ||
+      loc !== "Middle Middle"
+  );
+
+  const sliderValue = document.getElementById("ballStrikeSlider").value;
+  let location;
+
+  if (sliderValue == 0) {
+    // All strikes
+    const strikeLocations = availableLocations.filter(
+      (loc) => !loc.includes("Out")
+    );
+    location =
+      strikeLocations[Math.floor(Math.random() * strikeLocations.length)];
+  } else if (sliderValue >= 1 && sliderValue <= 49) {
+    // Mostly strikes
+    if (Math.random() < 0.75) {
+      const strikeLocations = availableLocations.filter(
+        (loc) => !loc.includes("Out")
+      );
+      location =
+        strikeLocations[Math.floor(Math.random() * strikeLocations.length)];
+    } else {
+      location =
+        availableLocations[
+          Math.floor(Math.random() * availableLocations.length)
+        ];
+    }
+  } else if (sliderValue == 50) {
+    // Completely random
+    location =
+      availableLocations[Math.floor(Math.random() * availableLocations.length)];
+  } else if (sliderValue >= 51 && sliderValue <= 99) {
+    // Mostly balls
+    if (Math.random() < 0.75) {
+      const ballLocations = availableLocations.filter((loc) =>
+        loc.includes("Out")
+      );
+      location =
+        ballLocations[Math.floor(Math.random() * ballLocations.length)];
+    } else {
+      location =
+        availableLocations[
+          Math.floor(Math.random() * availableLocations.length)
+        ];
+    }
+  } else if (sliderValue == 100) {
+    // All balls
+    const ballLocations = availableLocations.filter((loc) =>
+      loc.includes("Out")
+    );
+    location = ballLocations[Math.floor(Math.random() * ballLocations.length)];
+  }
 
   document.getElementById(
     "output"
-  ).innerText = `Pitch: ${speed} ${pitchType} to ${location}`;
+  ).innerHTML = `Pitch: <span id="speedLabel">${speed}</span> ${pitchType} to ${location}`;
+  colorSpeed(speed);
+}
+
+function colorSpeed(speed) {
+  const speedLabel = document.getElementById("speedLabel");
+  if (speed === "Red") {
+    speedLabel.style.color = "red";
+  } else if (speed === "Yellow") {
+    speedLabel.style.color = "yellow";
+  } else if (speed === "Green") {
+    speedLabel.style.color = "green";
+  } else if (speed === "Blue") {
+    speedLabel.style.color = "blue";
+  }
 }
 
 function incrementBalls() {
@@ -76,4 +134,19 @@ function updateCount() {
   document.getElementById(
     "count"
   ).innerText = `Count: ${balls} Balls, ${strikes} Strikes`;
+}
+
+function updateSliderLabel() {
+  const value = document.getElementById("ballStrikeSlider").value;
+  if (value == 0) {
+    document.getElementById("sliderLabel").innerText = "All Strikes";
+  } else if (value >= 1 && value <= 39) {
+    document.getElementById("sliderLabel").innerText = "Mostly Strikes";
+  } else if (value >= 40 && value <= 60) {
+    document.getElementById("sliderLabel").innerText = "Random";
+  } else if (value >= 61 && value <= 99) {
+    document.getElementById("sliderLabel").innerText = "Mostly Balls";
+  } else if (value == 100) {
+    document.getElementById("sliderLabel").innerText = "All Balls";
+  }
 }
