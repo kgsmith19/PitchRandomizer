@@ -18,14 +18,14 @@ const locations = [
   "Outside Low",
   "Outside Middle",
   "Outside High",
-  "Inside Low Out",
-  "Inside Middle Out",
-  "Inside High Out",
-  "High Middle Out",
-  "Middle Low Out",
-  "Outside Low Out",
-  "Outside Middle Out",
-  "Outside High Out",
+  "Inside Low Bait",
+  "Inside Middle Bait",
+  "Inside High Bait",
+  "High Middle Bait",
+  "Middle Low Bait",
+  "Outside Low Bait",
+  "Outside Middle Bait",
+  "Outside High Bait",
 ];
 
 let balls = 0;
@@ -47,7 +47,7 @@ function randomizePitch() {
   if (sliderValue == 0) {
     // All strikes
     const strikeLocations = availableLocations.filter(
-      (loc) => !loc.includes("Out")
+      (loc) => !loc.includes("Bait")
     );
     location =
       strikeLocations[Math.floor(Math.random() * strikeLocations.length)];
@@ -55,7 +55,7 @@ function randomizePitch() {
     // Mostly strikes
     if (Math.random() < 0.75) {
       const strikeLocations = availableLocations.filter(
-        (loc) => !loc.includes("Out")
+        (loc) => !loc.includes("Bait")
       );
       location =
         strikeLocations[Math.floor(Math.random() * strikeLocations.length)];
@@ -73,7 +73,7 @@ function randomizePitch() {
     // Mostly balls
     if (Math.random() < 0.75) {
       const ballLocations = availableLocations.filter((loc) =>
-        loc.includes("Out")
+        loc.includes("Bait")
       );
       location =
         ballLocations[Math.floor(Math.random() * ballLocations.length)];
@@ -86,7 +86,7 @@ function randomizePitch() {
   } else if (sliderValue == 100) {
     // All balls
     const ballLocations = availableLocations.filter((loc) =>
-      loc.includes("Out")
+      loc.includes("Bait")
     );
     location = ballLocations[Math.floor(Math.random() * ballLocations.length)];
   }
