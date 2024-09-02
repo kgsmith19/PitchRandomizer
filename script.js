@@ -51,7 +51,7 @@ function randomizePitch() {
     );
     location =
       strikeLocations[Math.floor(Math.random() * strikeLocations.length)];
-  } else if (sliderValue >= 1 && sliderValue <= 49) {
+  } else if (sliderValue >= 1 && sliderValue <= 39) {
     // Mostly strikes
     if (Math.random() < 0.75) {
       const strikeLocations = availableLocations.filter(
@@ -65,11 +65,11 @@ function randomizePitch() {
           Math.floor(Math.random() * availableLocations.length)
         ];
     }
-  } else if (sliderValue == 50) {
+  } else if (sliderValue >= 40 && sliderValue <= 60) {
     // Completely random
     location =
       availableLocations[Math.floor(Math.random() * availableLocations.length)];
-  } else if (sliderValue >= 51 && sliderValue <= 99) {
+  } else if (sliderValue >= 61 && sliderValue <= 99) {
     // Mostly balls
     if (Math.random() < 0.75) {
       const ballLocations = availableLocations.filter((loc) =>
