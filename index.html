@@ -35,6 +35,35 @@
       #speedLabel {
         font-weight: bold;
       }
+      /* Container for centering */
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; /* Aligns the strike zone toward the top */
+        height: 100vh; /* Full viewport height */
+        padding-top: 50px; /* Adds some space from the top */
+      }
+
+      /* Strike zone grid */
+      .strike-zone {
+        display: grid;
+        grid-template-columns: repeat(3, 100px);
+        grid-template-rows: repeat(3, 100px);
+        gap: 5px;
+        border: 2px solid black;
+      }
+      .zone-cell {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #000;
+        font-size: 14px;
+        font-weight: bold;
+        background-color: white;
+      }
+      .highlight {
+        background-color: yellow !important;
+      }
     </style>
   </head>
   <body>
@@ -66,6 +95,23 @@
 
     <label for="allowMidsToggle">Allow Mids?</label>
     <input type="checkbox" id="allowMidsToggle" />
+
+    <!-- Container that centers content -->
+    <div class="container">
+      <div class="strike-zone">
+        <div id="InsideHigh" class="zone-cell">Inside High</div>
+        <div id="HighMiddle" class="zone-cell">High Middle</div>
+        <div id="OutsideHigh" class="zone-cell">Outside High</div>
+
+        <div id="InsideMiddle" class="zone-cell">Inside Middle</div>
+        <div id="MiddleMiddle" class="zone-cell">Middle Middle</div>
+        <div id="OutsideMiddle" class="zone-cell">Outside Middle</div>
+
+        <div id="InsideLow" class="zone-cell">Inside Low</div>
+        <div id="MiddleLow" class="zone-cell">Middle Low</div>
+        <div id="OutsideLow" class="zone-cell">Outside Low</div>
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>

@@ -18,14 +18,6 @@ const locations = [
   "Outside Low",
   "Outside Middle",
   "Outside High",
-  "Inside Low Bait",
-  "Inside Middle Bait",
-  "Inside High Bait",
-  "High Middle Bait",
-  "Middle Low Bait",
-  "Outside Low Bait",
-  "Outside Middle Bait",
-  "Outside High Bait",
 ];
 
 let balls = 0;
@@ -45,14 +37,12 @@ function randomizePitch() {
   let location;
 
   if (sliderValue == 0) {
-    // All strikes
     const strikeLocations = availableLocations.filter(
       (loc) => !loc.includes("Bait")
     );
     location =
       strikeLocations[Math.floor(Math.random() * strikeLocations.length)];
   } else if (sliderValue >= 1 && sliderValue <= 39) {
-    // Mostly strikes
     if (Math.random() < 0.75) {
       const strikeLocations = availableLocations.filter(
         (loc) => !loc.includes("Bait")
@@ -66,11 +56,9 @@ function randomizePitch() {
         ];
     }
   } else if (sliderValue >= 40 && sliderValue <= 60) {
-    // Completely random
     location =
       availableLocations[Math.floor(Math.random() * availableLocations.length)];
   } else if (sliderValue >= 61 && sliderValue <= 99) {
-    // Mostly balls
     if (Math.random() < 0.75) {
       const ballLocations = availableLocations.filter((loc) =>
         loc.includes("Bait")
@@ -84,7 +72,6 @@ function randomizePitch() {
         ];
     }
   } else if (sliderValue == 100) {
-    // All balls
     const ballLocations = availableLocations.filter((loc) =>
       loc.includes("Bait")
     );
@@ -95,6 +82,7 @@ function randomizePitch() {
     "output"
   ).innerHTML = `Pitch: <span id="speedLabel">${speed}</span> ${pitchType} to ${location}`;
   colorSpeed(speed);
+  highlightLocation(location);
 }
 
 function colorSpeed(speed) {
@@ -107,6 +95,20 @@ function colorSpeed(speed) {
     speedLabel.style.color = "green";
   } else if (speed === "Blue") {
     speedLabel.style.color = "blue";
+  }
+}
+
+function highlightLocation(location) {
+  // Clear previous highlights
+  document.querySelectorAll(".zone-cell").forEach((cell) => {
+    cell.classList.remove("highlight");
+  });
+
+  // Get the ID that corresponds to the location
+  const locationId = location.replace(/\s+/g, "");
+  const locationElement = document.getElementById(locationId);
+  if (locationElement) {
+    locationElement.classList.add("highlight");
   }
 }
 
